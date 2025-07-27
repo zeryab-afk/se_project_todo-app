@@ -1,0 +1,183 @@
+/* Exact font from your image (system font stack matching the screenshot) */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 20px;
+}
+
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Header styles matching image */
+.todo-app__title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+}
+
+/* Subheader with exact spacing */
+.todo-app__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.todo-app__subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Add Todo button exact style */
+.todo-app__add-button {
+  background: none;
+  border: none;
+  color: #0066cc;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+
+.todo-app__add-button:hover {
+  text-decoration: underline;
+}
+
+/* Counter text style */
+.todo-app__counter {
+  margin: 0 0 0 auto;
+  color: #666;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Todo list styling */
+.todo-app__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Individual todo items */
+.todo-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.todo-item__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Checkbox styling to match image */
+.todo-item__checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #1a1a1a;
+}
+
+.todo-item__text {
+  flex-grow: 1;
+}
+
+.todo-item__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.todo-item[data-completed="true"] .todo-item__title {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todo-item__due-date {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Delete link exact style */
+.todo-item__delete {
+  background: none;
+  border: none;
+  color: #cc0000;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  margin-left: auto;
+  font-weight: 400;
+}
+
+.todo-item__delete:hover {
+  text-decoration: underline;
+}
+
+/* Popup styling to match */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.popup_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup__container {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form__title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.form__input {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form__submit {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}

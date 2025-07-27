@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Simple ToDo App</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body>
+  <div class="page">
+    <main class="content">
+      <section class="todo-app">
+        <h1 class="todo-app__title">The Simple ToDo App</h1>
+        
+        <div class="todo-app__header">
+          <h2 class="todo-app__subtitle">What do you need to do?</h2>
+          <button class="todo-app__add-button">+ Add Todo</button>
+          <p class="todo-app__counter">Showing <span>X</span> out of <span>Y</span> completed</p>
+        </div>
+        
+        <ul class="todo-app__list">
+          <!-- Todos will be inserted here by JavaScript -->
+        </ul>
+      </section>
+    </main>
+
+    <!-- Popup for adding new todos -->
+    <div class="popup">
+      <div class="popup__container">
+        <form class="form" novalidate>
+          <h3 class="form__title">New Todo</h3>
+          <fieldset class="form__fieldset">
+            <input type="text" class="form__input" placeholder="Todo description" required>
+            <input type="date" class="form__input form__due-date">
+            <button type="submit" class="form__submit" disabled>Add</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <!-- Todo item template -->
+    <template id="todo-template">
+      <li class="todo-item">
+        <div class="todo-item__content">
+          <input type="checkbox" class="todo-item__checkbox">
+          <div class="todo-item__text">
+            <h3 class="todo-item__title"></h3>
+            <p class="todo-item__due-date"></p>
+          </div>
+          <button class="todo-item__delete">Delete</button>
+        </div>
+      </li>
+    </template>
+
+    <script type="module" src="./pages/index.js"></script>
+  </div>
+</body>
+</html>
