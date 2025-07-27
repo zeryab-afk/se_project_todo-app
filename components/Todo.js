@@ -1,54 +1,42 @@
 export default class Todo {
-  constructor(data, selector) {
-    this._name = data.name;
-    this._id = data.id;
-    this._completed = data.completed;
-    this._dueDate = data.dueDate;
-    this._selector = selector;
+  constructor(data) {  // Removed selector parameter as it's not needed
+    this.id = data.id || crypto.randomUUID();  // Changed to regular id and added UUID generation
+    this.name = data.name;
+    this.completed = data.completed || false;
+    this.date = new Date(data.date);  // Changed dueDate to date to match your index.js
   }
 
-  _getTemplate() {
-    return document
-      .querySelector(this._selector)
-      .content
-      .querySelector('.todo-item')
-      .cloneNode(true);
-  }
+  generateElement(template) {  // Renamed from getView to match your index.js calls
+    const element = template.content.querySelector('.todo').cloneNode(true);  // Changed selector to match your HTML
+    const checkbox = element.querySelector('.todo__completed');  // Updated selectors to match your HTML
+    const nameEl = element.querySelector('.todo__name');
+    const dateEl = element.querySelector('.todo__date');
+    const deleteBtn = element.querySelector('.todo__delete-btn');
 
-  _setEventListeners() {
-    this._element.querySelector('.todo-item__checkbox').addEventListener('change', () => {
-      this._toggleCompleted();
+    // Set element properties
+    checkbox.checked = this.completed;
+    checkbox.id = `todo-${this.id}`;
+    element.querySelector('.todo__label').setAttribute('for', `todo-${this.id}`);
+    nameEl.textContent = this.name;
+
+    // Format and display date
+    if (!isNaN(this.date)) {
+      dateEl.textContent = `Due: ${this.date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      })}`;
+    }
+
+    // Add event listeners
+    checkbox.addEventListener('change', () => {
+      this.completed = checkbox.checked;
     });
-    
-    this._element.querySelector('.todo-item__delete').addEventListener('click', () => {
-      this._handleDelete();
+
+    deleteBtn.addEventListener('click', () => {
+      element.remove();
     });
-  }
 
-  _toggleCompleted() {
-    this._completed = !this._completed;
-    this._element.dataset.completed = this._completed;
-  }
-
-  _handleDelete() {
-    this._element.remove();
-  }
-
-  getView() {
-    this._element = this._getTemplate();
-    
-    const checkbox = this._element.querySelector('.todo-item__checkbox');
-    const title = this._element.querySelector('.todo-item__title');
-    const dueDate = this._element.querySelector('.todo-item__due-date');
-    
-    checkbox.checked = this._completed;
-    this._element.dataset.completed = this._completed;
-    
-    title.textContent = this._name;
-    dueDate.textContent = this._dueDate ? `Due: ${this._dueDate}` : '';
-    
-    this._setEventListeners();
-    
-    return this._element;
+    return element;
   }
 }
