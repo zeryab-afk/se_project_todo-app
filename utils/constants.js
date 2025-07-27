@@ -1,29 +1,29 @@
 export const initialTodos = [
   {
-    id: "1",
+    id: "7cec7373-681b-49d9-b065-021d61a69d03",
     name: "Read the sprint's theory",
     completed: true,
-    dueDate: "Nov 22, 2023"
+    date: new Date(),
   },
   {
-    id: "2",
+    id: "a7bfd5ef-37cc-4fa6-89f2-cac098a8aeba",
     name: "Read project instructions",
     completed: false,
-    dueDate: "Nov 22, 2023"
+    date: new Date(),
   },
   {
-    id: "3",
+    id: "aa486839-63ab-437f-b8a2-29ab217dff4f",
     name: "Complete project",
     completed: false,
-    dueDate: "Nov 22, 2023"
-  }
+    date: new Date(),
+  },
 ];
 
 export const validationConfig = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit",
-  inactiveButtonClass: "form__submit_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible"
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  errorClass: "popup__error_visible",
+  inputErrorClass: "popup__input_type_error",
+  inactiveButtonClass: "button_disabled",
 };
