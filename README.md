@@ -1,21 +1,17 @@
-# To-Do App
+# Simple Todo App
 
-A simple to-do application built using modular JavaScript and Object-Oriented Programming.
+Give a brief description of the project here. Feel free to give it a different name.
 
-## Features
+## Functionality
 
-- Add and delete to-dos
-- Mark to-dos as complete/incomplete
-- Form validation
-- Reset form after submission
+Give a more detailed explanation of the project and its functionality.
 
-## Technologies
+## Technology
 
-- HTML
-- CSS (BEM)
-- JavaScript (ES6 Classes and Modules)
-- UUID for unique IDs
+Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
 
-## GitHub Pages
+## Deployment
 
-Deployed link: [Add your link here]
+This project is deployed on GitHub Pages:
+
+- ADD LINK HERE
