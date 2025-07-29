@@ -17,7 +17,7 @@ export default class FormValidator {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.classList.remove(this._config.errorClass);
-    errorElement.textContent = "";
+    errorElement.textContent = '';
   }
 
   _checkInputValidity(inputElement) {
@@ -44,7 +44,7 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._inputList.forEach(inputElement => {
-      inputElement.addEventListener("input", () => {
+      inputElement.addEventListener('input', () => { // <<< Changed to single quotes
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
@@ -57,7 +57,7 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    this._formElement.addEventListener("submit", (evt) => {
+    this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
     this._setEventListeners();
