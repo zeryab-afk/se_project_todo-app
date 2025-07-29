@@ -27,3 +27,9 @@ export const validationConfig = {
   inputErrorClass: "popup__input_type_error",
   inactiveButtonClass: "button_disabled",
 };
+
+export const selectors = {
+  todoContainer: '.todos__list',
+  counterSelector: '.counter__text',
+  addTodoPopup: '#add-todo-popup'
+};
