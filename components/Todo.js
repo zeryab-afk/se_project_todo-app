@@ -1,9 +1,10 @@
 export default class Todo {
-  constructor(data) {
+  constructor(data, handleCounterUpdate) { // <<< Added callback parameter
     this.id = data.id || crypto.randomUUID();
     this.name = data.name;
     this.completed = data.completed || false;
     this.date = new Date(data.date);
+    this._handleCounterUpdate = handleCounterUpdate; // <<< Store callback
   }
 
   generateElement(template) {
@@ -27,15 +28,24 @@ export default class Todo {
     }
 
     checkbox.addEventListener('change', () => {
+      const wasCompleted = this.completed;
       this.completed = checkbox.checked;
-      // Here we would need to update the counter
-      // This would require passing the counter instance, which we'll handle in index.js
+      
+      // <<< Added counter updates for checkbox changes
+      if (this.completed && !wasCompleted) {
+        this._handleCounterUpdate('incrementCompleted');
+      } else if (!this.completed && wasCompleted) {
+        this._handleCounterUpdate('decrementCompleted');
+      }
     });
 
     deleteBtn.addEventListener('click', () => {
+      // <<< Added counter updates for deletion
+      if (this.completed) {
+        this._handleCounterUpdate('decrementCompleted');
+      }
+      this._handleCounterUpdate('decrementTotal');
       element.remove();
-      // Here we would need to update the counter
-      // This would require passing the counter instance, which we'll handle in index.js
     });
 
     return element;
