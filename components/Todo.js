@@ -1,25 +1,23 @@
 export default class Todo {
-  constructor(data) {  // Removed selector parameter as it's not needed
-    this.id = data.id || crypto.randomUUID();  // Changed to regular id and added UUID generation
+  constructor(data) {
+    this.id = data.id || crypto.randomUUID();
     this.name = data.name;
     this.completed = data.completed || false;
-    this.date = new Date(data.date);  // Changed dueDate to date to match your index.js
+    this.date = new Date(data.date);
   }
 
-  generateElement(template) {  // Renamed from getView to match your index.js calls
-    const element = template.content.querySelector('.todo').cloneNode(true);  // Changed selector to match your HTML
-    const checkbox = element.querySelector('.todo__completed');  // Updated selectors to match your HTML
+  generateElement(template) {
+    const element = template.content.querySelector('.todo').cloneNode(true);
+    const checkbox = element.querySelector('.todo__completed');
     const nameEl = element.querySelector('.todo__name');
     const dateEl = element.querySelector('.todo__date');
     const deleteBtn = element.querySelector('.todo__delete-btn');
 
-    // Set element properties
     checkbox.checked = this.completed;
     checkbox.id = `todo-${this.id}`;
     element.querySelector('.todo__label').setAttribute('for', `todo-${this.id}`);
     nameEl.textContent = this.name;
 
-    // Format and display date
     if (!isNaN(this.date)) {
       dateEl.textContent = `Due: ${this.date.toLocaleString('en-US', {
         year: 'numeric',
@@ -28,13 +26,16 @@ export default class Todo {
       })}`;
     }
 
-    // Add event listeners
     checkbox.addEventListener('change', () => {
       this.completed = checkbox.checked;
+      // Here we would need to update the counter
+      // This would require passing the counter instance, which we'll handle in index.js
     });
 
     deleteBtn.addEventListener('click', () => {
       element.remove();
+      // Here we would need to update the counter
+      // This would require passing the counter instance, which we'll handle in index.js
     });
 
     return element;
