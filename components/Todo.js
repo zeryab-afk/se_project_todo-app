@@ -1,10 +1,11 @@
 export default class Todo {
-  constructor(data, handleCounterUpdate) { // <<< Added callback parameter
+  constructor(data, handleCheck, handleDelete) { // <<< Changed to separate handlers
     this.id = data.id || crypto.randomUUID();
     this.name = data.name;
     this.completed = data.completed || false;
     this.date = new Date(data.date);
-    this._handleCounterUpdate = handleCounterUpdate; // <<< Store callback
+    this._handleCheck = handleCheck; // <<< New handler
+    this._handleDelete = handleDelete; // <<< New handler
   }
 
   generateElement(template) {
@@ -28,23 +29,12 @@ export default class Todo {
     }
 
     checkbox.addEventListener('change', () => {
-      const wasCompleted = this.completed;
       this.completed = checkbox.checked;
-      
-      // <<< Added counter updates for checkbox changes
-      if (this.completed && !wasCompleted) {
-        this._handleCounterUpdate('incrementCompleted');
-      } else if (!this.completed && wasCompleted) {
-        this._handleCounterUpdate('decrementCompleted');
-      }
+      this._handleCheck(this.completed); // <<< Using new handler
     });
 
     deleteBtn.addEventListener('click', () => {
-      // <<< Added counter updates for deletion
-      if (this.completed) {
-        this._handleCounterUpdate('decrementCompleted');
-      }
-      this._handleCounterUpdate('decrementTotal');
+      this._handleDelete(this.completed); // <<< Using new handler
       element.remove();
     });
 
