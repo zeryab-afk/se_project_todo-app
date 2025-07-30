@@ -8,32 +8,33 @@ import { initialTodos, validationConfig, selectors } from '../utils/constants.js
 // Initialize Todo Counter
 const todoCounter = new TodoCounter(initialTodos, selectors.counterSelector);
 
-// Create counter update handler
-const handleCounterUpdate = (action) => {
-  switch (action) {
-    case 'incrementCompleted':
-      todoCounter.updateCompleted(true);
-      break;
-    case 'decrementCompleted':
-      todoCounter.updateCompleted(false);
-      break;
-    case 'incrementTotal':
-      todoCounter.updateTotal(true);
-      break;
-    case 'decrementTotal':
-      todoCounter.updateTotal(false);
-      break;
+// Handler functions
+const handleCheck = (completed) => {
+  if (completed) {
+    todoCounter.updateCompleted(true);
+  } else {
+    todoCounter.updateCompleted(false);
   }
 };
 
-// Initialize Todo Section with counter integration
+const handleDelete = (completed) => {
+  if (completed) {
+    todoCounter.updateCompleted(false);
+  }
+  todoCounter.updateTotal(false);
+};
+
+// Render function to avoid duplication
+const renderTodo = (item) => {
+  const todo = new Todo(item, handleCheck, handleDelete);
+  const todoElement = todo.generateElement(document.querySelector('#todo-template'));
+  todoSection.addItem(todoElement);
+};
+
+// Initialize Todo Section
 const todoSection = new Section({
   items: initialTodos,
-  renderer: (item) => {
-    const todo = new Todo(item, handleCounterUpdate); // <<< Added counter callback
-    const todoElement = todo.generateElement(document.querySelector('#todo-template'));
-    todoSection.addItem(todoElement);
-  },
+  renderer: renderTodo, // <<< Using the render function
   containerSelector: selectors.todoContainer
 });
 
@@ -41,17 +42,15 @@ const todoSection = new Section({
 const formValidator = new FormValidator(validationConfig, document.querySelector('#add-todo-form'));
 formValidator.enableValidation();
 
-// Initialize PopupWithForm with counter updates
+// Initialize PopupWithForm
 const addTodoPopup = new PopupWithForm(selectors.addTodoPopup, (formData) => {
-  const todo = new Todo({
+  renderTodo({ // <<< Using the render function
     name: formData.name,
-    date: formData.date ? new Date(formData.date) : new Date(),
+    date: formData.date ? new Date(formData.date) : '', // <<< Fixed date handling
     completed: false
-  }, handleCounterUpdate); // <<< Added counter callback
-  
-  const todoElement = todo.generateElement(document.querySelector('#todo-template'));
-  todoSection.addItem(todoElement);
-  handleCounterUpdate('incrementTotal'); // <<< Updated to use handler
+  });
+  todoCounter.updateTotal(true);
+  formValidator.resetValidation(); // <<< Added form reset
 });
 addTodoPopup.setEventListeners();
 
