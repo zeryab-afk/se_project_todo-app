@@ -44,7 +44,7 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._inputList.forEach(inputElement => {
-      inputElement.addEventListener('input', () => { // <<< Changed to single quotes
+      inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
@@ -52,6 +52,7 @@ export default class FormValidator {
   }
 
   resetValidation() {
+    this._formElement.reset(); // <<< Added form reset
     this._inputList.forEach(inputElement => this._hideInputError(inputElement));
     this._toggleButtonState();
   }
